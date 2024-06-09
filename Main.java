@@ -54,7 +54,7 @@ class Nodo {
 
 public class Main {
 
-    static void imprimirLista(ListaEnlazada lista) {
+    static void printTree(ListaEnlazada lista) {
         preOrder(lista.cabeza, 0);
     }
 
@@ -103,6 +103,6 @@ public class Main {
         lista.insertar(9);
         lista.insertar(8);
         lista.insertar(11);
-        imprimirLista(lista);
+        printTree(lista);
     }
 }
