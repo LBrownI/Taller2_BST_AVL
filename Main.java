@@ -122,30 +122,30 @@ public class Main {
                     int valorEliminar = scanner.nextInt();
                     arbolActual.eliminar(valorEliminar);
                 } else if (operacion == 3) {
-                    System.out.println("La altura del árbol es: " + arbolActual.altura(arbolActual.raiz));
+                    System.out.println("La altura del árbol es: " + arbolActual.altura(arbolActual.cabeza));
                 } else if (operacion == 4) {
-                    System.out.println("La cantidad de nodos del árbol es: " + arbolActual.contarNodos(arbolActual.raiz));
+                    System.out.println("La cantidad de nodos del árbol es: " + arbolActual.contarNodos(arbolActual.cabeza));
                 } else if (operacion == 5) {
                     System.out.print("Recorrido in-order: ");
-                    arbolActual.inOrder(arbolActual.raiz);
+                    arbolActual.inOrder(arbolActual.cabeza);
                     System.out.println();
                 } else if (operacion == 6) {
                     System.out.print("Recorrido pre-order: ");
-                    arbolActual.preOrder(arbolActual.raiz);
+                    arbolActual.preOrder(arbolActual.cabeza);
                     System.out.println();
                 } else if (operacion == 7) {
                     System.out.print("Recorrido post-order: ");
-                    arbolActual.postOrder(arbolActual.raiz);
+                    arbolActual.postOrder(arbolActual.cabeza);
                     System.out.println();
                 } else if (operacion == 8) {
-                    if (arbolActual.raiz != null) {
-                        System.out.println("El valor mínimo del árbol es: " + arbolActual.minValor(arbolActual.raiz));
+                    if (arbolActual.cabeza != null) {
+                        System.out.println("El valor mínimo del árbol es: " + arbolActual.minValor(arbolActual.cabeza));
                     } else {
                         System.out.println("El árbol está vacío.");
                     }
                 } else if (operacion == 9) {
-                    if (arbolActual.raiz != null) {
-                        System.out.println("El valor máximo del árbol es: " + arbolActual.maxValor(arbolActual.raiz));
+                    if (arbolActual.cabeza != null) {
+                        System.out.println("El valor máximo del árbol es: " + arbolActual.maxValor(arbolActual.cabeza));
                     } else {
                         System.out.println("El árbol está vacío.");
                     }
