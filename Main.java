@@ -1,4 +1,6 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 class ListaEnlazada {
     Nodo cabeza;
@@ -53,12 +55,26 @@ public class Main {
 
     static void imprimirLista(ListaEnlazada lista) {
         Nodo actual = lista.cabeza;
-        
-        int[] a = new int[2];
-        Nodo[][] height = new Nodo[3][3];
-        height[0][0] = actual;
-        while (actual != null) {
-        }
+        ArrayList<Nodo[]> a = new ArrayList<>();
+        Nodo[] b = new Nodo[1];
+        b[0] = actual;
+        a.add(b);
+
+        System.out.println(b[0].value);
+
+        Nodo[] c = new Nodo[2];
+        c[0] = a.getFirst()[0].left_child;
+        c[1] = a.getFirst()[0].right_child;
+
+        a.add(c);
+
+        System.out.println(Arrays.toString(a.get(0)));
+        System.out.println(Arrays.toString(a.get(1)));
+
+//        while (actual.left_child != null) {
+//            actual = actual.left_child;
+//            System.out.println(actual.value);
+//        }
     }
 //            System.out.print(actual.valor + " ");
 //            actual = actual.siguiente;
@@ -75,5 +91,6 @@ public class Main {
         lista.insertar(2);
         lista.insertar(4);
         lista.insertar(1);
+        imprimirLista(lista);
     }
 }
