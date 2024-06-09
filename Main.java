@@ -1,5 +1,20 @@
-import java.util.ArrayList;
 import java.util.Scanner;
+
+class Nodo {
+    int value;
+    Nodo partner;
+    Nodo left_child;
+    Nodo right_child = null;
+    int altura;
+
+    Nodo(int value) {
+        this.value = value;
+        this.partner = null;
+        this.left_child = null;
+        this.right_child = null;
+        this.altura = 1;
+    }
+}
 
 class ArbolBinario {
     Nodo cabeza;
@@ -34,22 +49,72 @@ class ArbolBinario {
             }
         }
     }
-}
+    int altura(Nodo x) {
+        if (x == null) {
+            return -1;
+        } else {
+            return 1 + Math.max(altura(x.left_child), altura(x.right_child));
+        }
+    }
 
-class Nodo {
-    int value;
-    Nodo partner;
-    Nodo left_child;
-    Nodo right_child = null;
+    int alturaArbol() {
+        return altura(cabeza);
+    }
 
-    Nodo(int value) {
-        this.value = value;
-        this.partner = null;
-        this.left_child = null;
-        this.right_child = null;
+    int numNodos(Nodo x) {
+        if (x == null) {
+            return 0;
+        } else {
+            return 1 + numNodos(x.left_child) + numNodos(x.right_child);
+        }
+    }
+
+    int numNodosArbol() {
+        return numNodos(cabeza);
+    }
+
+    void inOrder(Nodo x){
+        if (x != null){
+            inOrder(x.left_child);
+            System.out.println(x.value);
+            inOrder(x.right_child);
+        }
+    }
+    void preOrder(Nodo x){
+        if (x != null){
+            System.out.println(x.value);
+            preOrder(x.left_child);
+            preOrder(x.right_child);
+        }
+    }
+    void postOrder(Nodo x){
+        if (x != null){
+            postOrder(x.left_child);
+            postOrder(x.right_child);
+            System.out.println(x.value);
+        }
+    }
+    Nodo treeMin(Nodo x){ //Could be int I think??
+        while (x.left_child != null){
+            x = x.left_child;
+        }
+        return x;
+    }
+    Nodo treeMax(Nodo x){
+        while (x.right_child != null){
+            x = x.right_child;
+        }
+        return x;
     }
 }
 
+class ArbolAVL extends ArbolBinario {
+    int altura(Nodo N) {
+        if (N == null) {
+            return 0;
+        }
+        return N.altura;
+}
 public class Main {
 
     static void imprimirLista(ArbolBinario lista) {
