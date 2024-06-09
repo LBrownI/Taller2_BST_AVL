@@ -55,14 +55,10 @@ class Nodo {
 public class Main {
 
     static void imprimirLista(ListaEnlazada lista) {
-        List<String> result = new ArrayList<>();
-        preOrder(lista.cabeza, result);
-        for (String line : result) {
-            System.out.println(line);
-        }
+        preOrder(lista.cabeza, 0);
     }
 
-    static void preOrder(Nodo node, List<String> result) {
+    static void preOrder(Nodo node, int nodeHeight) {
         if (node == null) {
             return;
         }
@@ -87,9 +83,14 @@ public class Main {
             }
         }
 
-        result.add("Parent: " + parentValue + " <--- Node: " + nodeValue + " " +leftOrRightChild);
-        preOrder(node.left_child, result);
-        preOrder(node.right_child, result);
+        for (int i = 0; i < nodeHeight; i++) {
+            System.out.print("     ");
+        }
+
+        System.out.println("Parent: " + parentValue + " <--- Node: " + nodeValue + " " +leftOrRightChild + " depth" + nodeHeight);
+        preOrder(node.left_child, nodeHeight+1);
+        preOrder(node.right_child, nodeHeight+1);
+
     }
 
 
