@@ -87,7 +87,7 @@ public class Main {
             System.out.print("     ");
         }
 
-        System.out.println("Parent: " + parentValue + " <--- Node: " + nodeValue + " " +leftOrRightChild + " depth" + nodeHeight);
+        System.out.println("└──Parent: " + parentValue + " ---> Node: " + nodeValue + " " +leftOrRightChild);
         preOrder(node.left_child, nodeHeight+1);
         preOrder(node.right_child, nodeHeight+1);
 
