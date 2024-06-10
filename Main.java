@@ -55,6 +55,10 @@ class Nodo {
 public class Main {
 
     static void printTree(ListaEnlazada lista) {
+        if (lista.cabeza == null) {
+            System.out.println("The tree is empty");
+            return;
+        }
         preOrder(lista.cabeza, 0);
     }
 
