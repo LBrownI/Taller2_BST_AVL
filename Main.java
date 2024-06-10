@@ -47,13 +47,11 @@ class ListaEnlazada {
             }
         }
         if (actual.left_child == null){
-            transplant()
+            transplant(actual);
         }
-
-
     }
 
-    void transplant(Nodo ){
+    void transplant(Nodo nodo){
 
     }
 }
