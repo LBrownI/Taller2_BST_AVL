@@ -1,201 +1,201 @@
 import java.util.Scanner;
 
-class Nodo {
+class Node {
     int value;
-    Nodo partner;
-    Nodo left_child;
-    Nodo right_child = null;
-    int altura;
+    Node parent;
+    Node left;
+    Node right = null;
+    int height;
 
-    Nodo(int value) {
+    Node(int value) {
         this.value = value;
-        this.partner = null;
-        this.left_child = null;
-        this.right_child = null;
-        this.altura = 1;
+        this.parent = null;
+        this.left = null;
+        this.right = null;
+        this.height = 1;
     }
 }
 
-class ArbolBinario {
-    Nodo cabeza;
+class BinaryTree {
+    Node root;
 
-    ArbolBinario() {
-        this.cabeza = null;
+    BinaryTree() {
+        this.root = null;
     }
 
     void insertar(int value) {
-        Nodo nuevoNodo = new Nodo(value);
-        if (cabeza == null) {
-            cabeza = nuevoNodo;
-            nuevoNodo.value = value;
+        Node newNode = new Node(value);
+        if (root == null) {
+            root = newNode;
+            newNode.value = value;
         } else {
-            Nodo actual = cabeza;
+            Node actual = root;
             while (true) {
                 if (value < actual.value) {
-                    if (actual.left_child == null) {
-                        actual.left_child = nuevoNodo;
-                        nuevoNodo.partner = actual;
+                    if (actual.left == null) {
+                        actual.left = newNode;
+                        newNode.parent = actual;
                         return;
                     }
-                    actual = actual.left_child;
+                    actual = actual.left;
                 } else {
-                    if (actual.right_child == null) {
-                        actual.right_child = nuevoNodo;
-                        nuevoNodo.partner = actual;
+                    if (actual.right == null) {
+                        actual.right = newNode;
+                        newNode.parent = actual;
                         return;
                     }
-                    actual = actual.right_child;
+                    actual = actual.right;
                 }
             }
         }
     }
 
     void delete(int value){
-        Nodo actual = cabeza;
+        Node actual = root;
         while (actual.value != value) {
             if (value < actual.value) {
-                actual = actual.left_child;
+                actual = actual.left;
             }
             else {
-                actual = actual.right_child;
+                actual = actual.right;
             }
             if (actual == null) {
                 System.out.println("The value you are trying to delete was not found.");
                 return;
             }
         }
-        if (actual.left_child == null){
+        if (actual.left == null){
             transplant(actual);
         }
     }
 
-    void transplant(Nodo nodo){
+    void transplant(Node x){
 
     }
-    int altura(Nodo x) {
+    int height(Node x) {
         if (x == null) {
             return -1;
         } else {
-            return 1 + Math.max(altura(x.left_child), altura(x.right_child));
+            return 1 + Math.max(height(x.left), height(x.right));
         }
     }
 
-    int alturaArbol() {
-        return altura(cabeza);
+    int heightTree() {
+        return height(root);
     }
 
-    int numNodos(Nodo x) {
+    int numNodes(Node x) {
         if (x == null) {
             return 0;
         } else {
-            return 1 + numNodos(x.left_child) + numNodos(x.right_child);
+            return 1 + numNodes(x.left) + numNodes(x.right);
         }
     }
 
-    int numNodosArbol(Nodo cabeza) {
-        return numNodos(this.cabeza);
+    int treeNodecount(Node root) {
+        return numNodes(this.root);
     }
 
-    void inOrder(Nodo x){
+    void inOrder(Node x){
         if (x != null){
-            inOrder(x.left_child);
+            inOrder(x.left);
             System.out.println(x.value);
-            inOrder(x.right_child);
+            inOrder(x.right);
         }
     }
-    void preOrder(Nodo x){
+    void preOrder(Node x){
         if (x != null){
             System.out.println(x.value);
-            preOrder(x.left_child);
-            preOrder(x.right_child);
+            preOrder(x.left);
+            preOrder(x.right);
         }
     }
-    void postOrder(Nodo x){
+    void postOrder(Node x){
         if (x != null){
-            postOrder(x.left_child);
-            postOrder(x.right_child);
+            postOrder(x.left);
+            postOrder(x.right);
             System.out.println(x.value);
         }
     }
-    Nodo treeMin(Nodo x){ //Could be int I think??
-        while (x.left_child != null){
-            x = x.left_child;
+    Node treeMin(Node x){ //Could be int I think??
+        while (x.left != null){
+            x = x.left;
         }
         return x;
     }
-    Nodo treeMax(Nodo x){
-        while (x.right_child != null){
-            x = x.right_child;
+    Node treeMax(Node x){
+        while (x.right != null){
+            x = x.right;
         }
         return x;
     }
 }
 
-class ArbolAVL extends ArbolBinario {
-    int altura(Nodo N) {
+class TreeAVL extends BinaryTree {
+    int height(Node N) {
         if (N == null) {
             return 0;
         }
-        return N.altura;
+        return N.height;
     }
-    private void rotateLeft(Nodo x) {
-        Nodo y = x.right_child;
-        x.right_child = y.left_child;
-        if (y.left_child != null) {
-            y.left_child.partner = x;
+    private void rotateLeft(Node x) {
+        Node y = x.right;
+        x.right = y.left;
+        if (y.left != null) {
+            y.left.parent = x;
         }
-        y.partner = x.partner;
-        if(x.partner != null){
-            cabeza = y;
+        y.parent = x.parent;
+        if(x.parent != null){
+            root = y;
         }
-        else if (x == x.partner.left_child) {
-            x.partner.left_child = y;
+        else if (x == x.parent.left) {
+            x.parent.left = y;
         }
         else {
-            x.partner.right_child = y;
+            x.parent.right = y;
         }
-        y.left_child = x;
-        x.partner = y;
+        y.left = x;
+        x.parent = y;
     }
-    private void rotateRight(Nodo y) {
-        Nodo x = y.left_child;
-        y.left_child = x.right_child;
-        if (x.right_child != null) {
-            x.right_child.partner = y;
+    private void rotateRight(Node y) {
+        Node x = y.left;
+        y.left = x.right;
+        if (x.right != null) {
+            x.right.parent = y;
         }
-        x.partner = y.partner;
-        if (y.partner == null){
-            cabeza = x;
+        x.parent = y.parent;
+        if (y.parent == null){
+            root = x;
         }
-        else if (y == y.partner.right_child){
-            y.partner.right_child = x;
+        else if (y == y.parent.right){
+            y.parent.right = x;
         }
         else {
-            y.partner.left_child = x;
+            y.parent.left = x;
         }
-        x.right_child = y;
-        y.partner = x;
+        x.right = y;
+        y.parent = x;
 
     }
 }
 public class Main {
 
-    static void printTree(ArbolBinario arbolBinario) {
-        if (arbolBinario.cabeza == null) {
+    static void printTree(BinaryTree binaryTree) {
+        if (binaryTree.root == null) {
             System.out.println("The tree is empty");
             return;
         }
-        preOrder(arbolBinario.cabeza, 0);
+        preOrder(binaryTree.root, 0);
     }
 
-    static void preOrder(Nodo node, int nodeHeight) {
+    static void preOrder(Node node, int nodeHeight) {
         if (node == null) {
             return;
         }
 
         String parentValue;
-        if (node.partner != null){
-            parentValue = String.valueOf(node.partner.value);
+        if (node.parent != null){
+            parentValue = String.valueOf(node.parent.value);
         }
         else {
             parentValue = "NIL";
@@ -204,8 +204,8 @@ public class Main {
         String nodeValue = String.valueOf(node.value);
 
         String leftOrRightChild = "(root)";
-        if (node.partner != null){
-            if (node.value < node.partner.value){
+        if (node.parent != null){
+            if (node.value < node.parent.value){
                 leftOrRightChild = "(left)";
             }
             else {
@@ -218,8 +218,8 @@ public class Main {
         }
 
         System.out.println("└──Parent: " + parentValue + " ---> Node: " + nodeValue + " " +leftOrRightChild);
-        preOrder(node.left_child, nodeHeight+1);
-        preOrder(node.right_child, nodeHeight+1);
+        preOrder(node.left, nodeHeight+1);
+        preOrder(node.right, nodeHeight+1);
 
     }
 
@@ -227,9 +227,9 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        ArbolBinario bst = new ArbolBinario();
-        ArbolAVL avl = new ArbolAVL();
-        ArbolBinario arbolActual = null;
+        BinaryTree bst = new BinaryTree();
+        TreeAVL avl = new TreeAVL();
+        BinaryTree arbolActual = null;
 
         while (true) {
             System.out.println("Seleccione el tipo de árbol:");
@@ -279,37 +279,37 @@ public class Main {
                     // arbolActual.delete(deleteValue);                   //PLACEHOLDER
                 }
                 else if (operation == 3) {
-                    System.out.println("La altura del árbol es: " + arbolActual.altura(arbolActual.cabeza));
+                    System.out.println("La altura del árbol es: " + arbolActual.height(arbolActual.root));
                 }
                 else if (operation == 4) {
-                    System.out.println("La cantidad de nodos del árbol es: " + arbolActual.numNodosArbol(arbolActual.cabeza));
+                    System.out.println("La cantidad de nodos del árbol es: " + arbolActual.treeNodecount(arbolActual.root));
                 }
                 else if (operation == 5) {
                     System.out.print("Recorrido in-order: ");
-                    arbolActual.inOrder(arbolActual.cabeza);
+                    arbolActual.inOrder(arbolActual.root);
                     System.out.println();
                 }
                 else if (operation == 6) {
                     System.out.print("Recorrido pre-order: ");
-                    arbolActual.preOrder(arbolActual.cabeza);
+                    arbolActual.preOrder(arbolActual.root);
                     System.out.println();
                 }
                 else if (operation == 7) {
                     System.out.print("Recorrido post-order: ");
-                    arbolActual.postOrder(arbolActual.cabeza);
+                    arbolActual.postOrder(arbolActual.root);
                     System.out.println();
                 }
                 else if (operation == 8) {
-                    if (arbolActual.cabeza != null) {
-                        System.out.println("El valor mínimo del árbol es: " + arbolActual.treeMin(arbolActual.cabeza));
+                    if (arbolActual.root != null) {
+                        System.out.println("El valor mínimo del árbol es: " + arbolActual.treeMin(arbolActual.root));
                     }
                     else {
                         System.out.println("El árbol está vacío.");
                     }
                 }
                 else if (operation == 9) {
-                    if (arbolActual.cabeza != null) {
-                        System.out.println("El valor máximo del árbol es: " + arbolActual.treeMax(arbolActual.cabeza));
+                    if (arbolActual.root != null) {
+                        System.out.println("El valor máximo del árbol es: " + arbolActual.treeMax(arbolActual.root));
                     }
                     else {
                         System.out.println("El árbol está vacío.");
