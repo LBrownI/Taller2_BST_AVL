@@ -69,8 +69,8 @@ class ArbolBinario {
         }
     }
 
-    int numNodosArbol() {
-        return numNodos(cabeza);
+    int numNodosArbol(Nodo cabeza) {
+        return numNodos(this.cabeza);
     }
 
     void inOrder(Nodo x){
@@ -114,6 +114,46 @@ class ArbolAVL extends ArbolBinario {
             return 0;
         }
         return N.altura;
+    }
+    private void rotateLeft(Nodo x) {
+        Nodo y = x.right_child;
+        x.right_child = y.left_child;
+        if (y.left_child != null) {
+            y.left_child.partner = x;
+        }
+        y.partner = x.partner;
+        if(x.partner != null){
+            cabeza = y;
+        }
+        else if (x == x.partner.left_child) {
+            x.partner.left_child = y;
+        }
+        else {
+            x.partner.right_child = y;
+        }
+        y.left_child = x;
+        x.partner = y;
+    }
+    private void rotateRight(Nodo y) {
+        Nodo x = y.left_child;
+        y.left_child = x.right_child;
+        if (x.right_child != null) {
+            x.right_child.partner = y;
+        }
+        x.partner = y.partner;
+        if (y.partner == null){
+            cabeza = x;
+        }
+        else if (y == y.partner.right_child){
+            y.partner.right_child = x;
+        }
+        else {
+            y.partner.left_child = x;
+        }
+        x.right_child = y;
+        y.partner = x;
+
+    }
 }
 public class Main {
 
@@ -178,43 +218,55 @@ public class Main {
 
                 if (operacion == 0) {
                     break;
-                } else if (operacion == 1) {
+                }
+                else if (operacion == 1) {
                     System.out.print("Ingrese el valor a insertar: ");
                     int valorInsertar = scanner.nextInt();
                     arbolActual.insertar(valorInsertar);
-                } else if (operacion == 2) {
+                }
+                else if (operacion == 2) {
                     System.out.print("Ingrese el valor a eliminar: ");
                     int valorEliminar = scanner.nextInt();
-                    arbolActual.eliminar(valorEliminar);
-                } else if (operacion == 3) {
+                    arbolActual.eliminar(valorEliminar);                   //PLACEHOLDER
+                }
+                else if (operacion == 3) {
                     System.out.println("La altura del árbol es: " + arbolActual.altura(arbolActual.cabeza));
-                } else if (operacion == 4) {
-                    System.out.println("La cantidad de nodos del árbol es: " + arbolActual.contarNodos(arbolActual.cabeza));
-                } else if (operacion == 5) {
+                }
+                else if (operacion == 4) {
+                    System.out.println("La cantidad de nodos del árbol es: " + arbolActual.numNodosArbol(arbolActual.cabeza));
+                }
+                else if (operacion == 5) {
                     System.out.print("Recorrido in-order: ");
                     arbolActual.inOrder(arbolActual.cabeza);
                     System.out.println();
-                } else if (operacion == 6) {
+                }
+                else if (operacion == 6) {
                     System.out.print("Recorrido pre-order: ");
                     arbolActual.preOrder(arbolActual.cabeza);
                     System.out.println();
-                } else if (operacion == 7) {
+                }
+                else if (operacion == 7) {
                     System.out.print("Recorrido post-order: ");
                     arbolActual.postOrder(arbolActual.cabeza);
                     System.out.println();
-                } else if (operacion == 8) {
+                }
+                else if (operacion == 8) {
                     if (arbolActual.cabeza != null) {
-                        System.out.println("El valor mínimo del árbol es: " + arbolActual.minValor(arbolActual.cabeza));
-                    } else {
+                        System.out.println("El valor mínimo del árbol es: " + arbolActual.treeMin(arbolActual.cabeza));
+                    }
+                    else {
                         System.out.println("El árbol está vacío.");
                     }
-                } else if (operacion == 9) {
+                }
+                else if (operacion == 9) {
                     if (arbolActual.cabeza != null) {
-                        System.out.println("El valor máximo del árbol es: " + arbolActual.maxValor(arbolActual.cabeza));
-                    } else {
+                        System.out.println("El valor máximo del árbol es: " + arbolActual.treeMax(arbolActual.cabeza));
+                    }
+                    else {
                         System.out.println("El árbol está vacío.");
                     }
-                } else {
+                }
+                else {
                     System.out.println("Opción no válida.");
                 }
             }
