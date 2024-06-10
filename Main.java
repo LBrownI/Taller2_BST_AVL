@@ -188,13 +188,13 @@ public class Main {
             System.out.println("2. Árbol Adelson-Velskii y Landis (AVL)");
             System.out.println("0. Salir");
 
-            int opcion = scanner.nextInt();
+            int option = scanner.nextInt();
 
-            if (opcion == 0) {
+            if (option == 0) {
                 break;
-            } else if (opcion == 1) {
+            } else if (option == 1) {
                 arbolActual = bst;
-            } else if (opcion == 2) {
+            } else if (option == 2) {
                 arbolActual = avl;
             } else {
                 System.out.println("Opción no válida.");
@@ -214,43 +214,42 @@ public class Main {
                 System.out.println("9. Determinar el máximo");
                 System.out.println("0. Volver al menú anterior");
 
-                int operacion = scanner.nextInt();
-
-                if (operacion == 0) {
+                int operation = scanner.nextInt();
+                if (operation == 0) {
                     break;
                 }
-                else if (operacion == 1) {
+                else if (operation == 1) {
                     System.out.print("Ingrese el valor a insertar: ");
                     int valorInsertar = scanner.nextInt();
                     arbolActual.insertar(valorInsertar);
                 }
-                else if (operacion == 2) {
+                else if (operation == 2) {
                     System.out.print("Ingrese el valor a eliminar: ");
-                    int valorEliminar = scanner.nextInt();
-                    arbolActual.eliminar(valorEliminar);                   //PLACEHOLDER
+                    int deleteValue = scanner.nextInt();
+                    // arbolActual.delete(deleteValue);                   //PLACEHOLDER
                 }
-                else if (operacion == 3) {
+                else if (operation == 3) {
                     System.out.println("La altura del árbol es: " + arbolActual.altura(arbolActual.cabeza));
                 }
-                else if (operacion == 4) {
+                else if (operation == 4) {
                     System.out.println("La cantidad de nodos del árbol es: " + arbolActual.numNodosArbol(arbolActual.cabeza));
                 }
-                else if (operacion == 5) {
+                else if (operation == 5) {
                     System.out.print("Recorrido in-order: ");
                     arbolActual.inOrder(arbolActual.cabeza);
                     System.out.println();
                 }
-                else if (operacion == 6) {
+                else if (operation == 6) {
                     System.out.print("Recorrido pre-order: ");
                     arbolActual.preOrder(arbolActual.cabeza);
                     System.out.println();
                 }
-                else if (operacion == 7) {
+                else if (operation == 7) {
                     System.out.print("Recorrido post-order: ");
                     arbolActual.postOrder(arbolActual.cabeza);
                     System.out.println();
                 }
-                else if (operacion == 8) {
+                else if (operation == 8) {
                     if (arbolActual.cabeza != null) {
                         System.out.println("El valor mínimo del árbol es: " + arbolActual.treeMin(arbolActual.cabeza));
                     }
@@ -258,7 +257,7 @@ public class Main {
                         System.out.println("El árbol está vacío.");
                     }
                 }
-                else if (operacion == 9) {
+                else if (operation == 9) {
                     if (arbolActual.cabeza != null) {
                         System.out.println("El valor máximo del árbol es: " + arbolActual.treeMax(arbolActual.cabeza));
                     }
