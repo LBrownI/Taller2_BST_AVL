@@ -31,6 +31,31 @@ class ListaEnlazada {
             }
         }
     }
+
+    void delete(int value){
+        Nodo actual = cabeza;
+        while (actual.value != value) {
+            if (value < actual.value) {
+                actual = actual.left_child;
+            }
+            else {
+                actual = actual.right_child;
+            }
+            if (actual == null) {
+                System.out.println("The value you are trying to delete was not found.");
+                return;
+            }
+        }
+        if (actual.left_child == null){
+            transplant()
+        }
+
+
+    }
+
+    void transplant(Nodo ){
+
+    }
 }
 
 class Nodo {
