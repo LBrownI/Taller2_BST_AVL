@@ -55,8 +55,7 @@ class BinaryTree {
         while (actual.value != value) {
             if (value < actual.value) {
                 actual = actual.left;
-            }
-            else {
+            } else {
                 actual = actual.right;
             }
             if (actual == null) {
@@ -65,13 +64,39 @@ class BinaryTree {
             }
         }
         if (actual.left == null){
-            transplant(actual);
+            transplant(actual, actual.right);
+        }
+        else if (actual.right == null){
+            transplant(actual, actual.left);
+        }
+        else {
+            Node y = treeMin(actual.right);
+            if (y.parent != actual){
+                transplant(y, y.right);
+                y.right = actual.right;
+                y.right.parent = y;
+            }
+            transplant(actual, y);
+            y.left = actual.left;
+            y.left.parent = y;
         }
     }
 
-    void transplant(Node x){
-
+    void transplant(Node u, Node v){
+        if (u.parent == null){
+            root = v;
+        }
+        else if (u == u.parent.left){
+            u.parent.left = v;
+        }
+        else {
+            u.parent.right = v;
+        }
+        if (v != null){
+            v.parent = u.parent;
+        }
     }
+
     int height(Node x) {
         if (x == null) {
             return -1;
@@ -276,7 +301,8 @@ public class Main {
                 else if (operation == 2) {
                     System.out.print("Ingrese el valor a eliminar: ");
                     int deleteValue = scanner.nextInt();
-                    // arbolActual.delete(deleteValue);                   //PLACEHOLDER
+                    arbolActual.delete(deleteValue);                   //PLACEHOLDER
+                    printTree(arbolActual);
                 }
                 else if (operation == 3) {
                     System.out.println("La altura del árbol es: " + arbolActual.height(arbolActual.root));
@@ -320,7 +346,6 @@ public class Main {
                 }
             }
         }
-
         scanner.close();
     }
 }
