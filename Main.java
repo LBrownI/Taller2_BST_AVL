@@ -55,8 +55,7 @@ class BinaryTree {
         while (actual.value != value) {
             if (value < actual.value) {
                 actual = actual.left;
-            }
-            else {
+            } else {
                 actual = actual.right;
             }
             if (actual == null) {
@@ -147,11 +146,9 @@ class TreeAVL extends BinaryTree {
         y.parent = x.parent;
         if(x.parent != null){
             root = y;
-        }
-        else if (x == x.parent.left) {
+        } else if (x == x.parent.left) {
             x.parent.left = y;
-        }
-        else {
+        } else {
             x.parent.right = y;
         }
         y.left = x;
@@ -166,16 +163,13 @@ class TreeAVL extends BinaryTree {
         x.parent = y.parent;
         if (y.parent == null){
             root = x;
-        }
-        else if (y == y.parent.right){
+        } else if (y == y.parent.right){
             y.parent.right = x;
-        }
-        else {
+        } else {
             y.parent.left = x;
         }
         x.right = y;
         y.parent = x;
-
     }
 }
 public class Main {
@@ -196,8 +190,7 @@ public class Main {
         String parentValue;
         if (node.parent != null){
             parentValue = String.valueOf(node.parent.value);
-        }
-        else {
+        } else {
             parentValue = "NIL";
         }
 
@@ -207,8 +200,7 @@ public class Main {
         if (node.parent != null){
             if (node.value < node.parent.value){
                 leftOrRightChild = "(left)";
-            }
-            else {
+            } else {
                 leftOrRightChild = "(right)";
             }
         }
@@ -266,61 +258,48 @@ public class Main {
                 int operation = scanner.nextInt();
                 if (operation == 0) {
                     break;
-                }
-                else if (operation == 1) {
+                } else if (operation == 1) {
                     System.out.print("Ingrese el valor a insertar: ");
                     int valorInsertar = scanner.nextInt();
                     arbolActual.insertar(valorInsertar);
                     printTree(arbolActual);
-                }
-                else if (operation == 2) {
+                } else if (operation == 2) {
                     System.out.print("Ingrese el valor a eliminar: ");
                     int deleteValue = scanner.nextInt();
                     // arbolActual.delete(deleteValue);                   //PLACEHOLDER
-                }
-                else if (operation == 3) {
+                } else if (operation == 3) {
                     System.out.println("La altura del árbol es: " + arbolActual.height(arbolActual.root));
-                }
-                else if (operation == 4) {
+                } else if (operation == 4) {
                     System.out.println("La cantidad de nodos del árbol es: " + arbolActual.treeNodecount(arbolActual.root));
-                }
-                else if (operation == 5) {
+                } else if (operation == 5) {
                     System.out.print("Recorrido in-order: ");
                     arbolActual.inOrder(arbolActual.root);
                     System.out.println();
-                }
-                else if (operation == 6) {
+                } else if (operation == 6) {
                     System.out.print("Recorrido pre-order: ");
                     arbolActual.preOrder(arbolActual.root);
                     System.out.println();
-                }
-                else if (operation == 7) {
+                } else if (operation == 7) {
                     System.out.print("Recorrido post-order: ");
                     arbolActual.postOrder(arbolActual.root);
                     System.out.println();
-                }
-                else if (operation == 8) {
+                } else if (operation == 8) {
                     if (arbolActual.root != null) {
                         System.out.println("El valor mínimo del árbol es: " + arbolActual.treeMin(arbolActual.root));
-                    }
-                    else {
+                    } else {
                         System.out.println("El árbol está vacío.");
                     }
-                }
-                else if (operation == 9) {
+                } else if (operation == 9) {
                     if (arbolActual.root != null) {
                         System.out.println("El valor máximo del árbol es: " + arbolActual.treeMax(arbolActual.root));
-                    }
-                    else {
+                    } else {
                         System.out.println("El árbol está vacío.");
                     }
-                }
-                else {
+                } else {
                     System.out.println("Opción no válida.");
                 }
             }
         }
-
         scanner.close();
     }
 }
