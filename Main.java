@@ -178,7 +178,7 @@ class TreeAVL extends BinaryTree {
             y.left.parent = x;
         }
         y.parent = x.parent;
-        if(x.parent != null){
+        if (x.parent == null) {
             root = y;
         } else if (x == x.parent.left) {
             x.parent.left = y;
@@ -198,9 +198,9 @@ class TreeAVL extends BinaryTree {
             x.right.parent = y;
         }
         x.parent = y.parent;
-        if (y.parent == null){
+        if (y.parent == null) {
             root = x;
-        } else if (y == y.parent.right){
+        } else if (y == y.parent.right) {
             y.parent.right = x;
         } else {
             y.parent.left = x;
