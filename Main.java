@@ -65,11 +65,9 @@ class BinaryTree {
         }
         if (actual.left == null){
             transplant(actual, actual.right);
-        }
-        else if (actual.right == null){
+        } else if (actual.right == null){
             transplant(actual, actual.left);
-        }
-        else {
+        } else {
             Node y = treeMin(actual.right);
             if (y.parent != actual){
                 transplant(y, y.right);
@@ -85,11 +83,9 @@ class BinaryTree {
     void transplant(Node u, Node v){
         if (u.parent == null){
             root = v;
-        }
-        else if (u == u.parent.left){
+        } else if (u == u.parent.left){
             u.parent.left = v;
-        }
-        else {
+        } else {
             u.parent.right = v;
         }
         if (v != null){
@@ -172,11 +168,9 @@ class TreeAVL extends BinaryTree {
         y.parent = x.parent;
         if(x.parent != null){
             root = y;
-        }
-        else if (x == x.parent.left) {
+        } else if (x == x.parent.left) {
             x.parent.left = y;
-        }
-        else {
+        } else {
             x.parent.right = y;
         }
         y.left = x;
@@ -191,11 +185,9 @@ class TreeAVL extends BinaryTree {
         x.parent = y.parent;
         if (y.parent == null){
             root = x;
-        }
-        else if (y == y.parent.right){
+        } else if (y == y.parent.right){
             y.parent.right = x;
-        }
-        else {
+        } else {
             y.parent.left = x;
         }
         x.right = y;
@@ -221,8 +213,7 @@ public class Main {
         String parentValue;
         if (node.parent != null){
             parentValue = String.valueOf(node.parent.value);
-        }
-        else {
+        } else {
             parentValue = "NIL";
         }
 
@@ -232,8 +223,7 @@ public class Main {
         if (node.parent != null){
             if (node.value < node.parent.value){
                 leftOrRightChild = "(left)";
-            }
-            else {
+            } else {
                 leftOrRightChild = "(right)";
             }
         }
@@ -291,57 +281,45 @@ public class Main {
                 int operation = scanner.nextInt();
                 if (operation == 0) {
                     break;
-                }
-                else if (operation == 1) {
+                } else if (operation == 1) {
                     System.out.print("Ingrese el valor a insertar: ");
                     int valorInsertar = scanner.nextInt();
                     arbolActual.insertar(valorInsertar);
                     printTree(arbolActual);
-                }
-                else if (operation == 2) {
+                } else if (operation == 2) {
                     System.out.print("Ingrese el valor a eliminar: ");
                     int deleteValue = scanner.nextInt();
                     arbolActual.delete(deleteValue);                   //PLACEHOLDER
                     printTree(arbolActual);
-                }
-                else if (operation == 3) {
+                } else if (operation == 3) {
                     System.out.println("La altura del árbol es: " + arbolActual.height(arbolActual.root));
-                }
-                else if (operation == 4) {
+                } else if (operation == 4) {
                     System.out.println("La cantidad de nodos del árbol es: " + arbolActual.treeNodecount(arbolActual.root));
-                }
-                else if (operation == 5) {
+                } else if (operation == 5) {
                     System.out.print("Recorrido in-order: ");
                     arbolActual.inOrder(arbolActual.root);
                     System.out.println();
-                }
-                else if (operation == 6) {
+                } else if (operation == 6) {
                     System.out.print("Recorrido pre-order: ");
                     arbolActual.preOrder(arbolActual.root);
                     System.out.println();
-                }
-                else if (operation == 7) {
+                } else if (operation == 7) {
                     System.out.print("Recorrido post-order: ");
                     arbolActual.postOrder(arbolActual.root);
                     System.out.println();
-                }
-                else if (operation == 8) {
+                } else if (operation == 8) {
                     if (arbolActual.root != null) {
                         System.out.println("El valor mínimo del árbol es: " + arbolActual.treeMin(arbolActual.root));
-                    }
-                    else {
+                    } else {
                         System.out.println("El árbol está vacío.");
                     }
-                }
-                else if (operation == 9) {
+                } else if (operation == 9) {
                     if (arbolActual.root != null) {
                         System.out.println("El valor máximo del árbol es: " + arbolActual.treeMax(arbolActual.root));
-                    }
-                    else {
+                    } else {
                         System.out.println("El árbol está vacío.");
                     }
-                }
-                else {
+                } else {
                     System.out.println("Opción no válida.");
                 }
             }
