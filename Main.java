@@ -152,6 +152,9 @@ class BinaryTree {
         }
         return x;
     }
+    public void clearTree() {
+        root = null;
+    }
 }
 
 class TreeAVL extends BinaryTree {
@@ -367,7 +370,7 @@ class TreeAVL extends BinaryTree {
 }
 public class Main {
 
-    static void printTree(BinaryTree binaryTree) {
+        static void printTree(BinaryTree binaryTree) {
         if (binaryTree.root == null) {
             System.out.println("El árbol está vacío");
             return;
@@ -449,6 +452,8 @@ public class Main {
                 System.out.println("7. Recorrido post-order");
                 System.out.println("8. Determinar valor mínimo");
                 System.out.println("9. Determinar valor máximo");
+                System.out.println("10.Mostrar el árbol");
+                System.out.println("11.Limpiar el árbol");
                 System.out.println("0. Volver al menú anterior");
 
                 int operation = scanner.nextInt();
@@ -519,6 +524,14 @@ public class Main {
                         printTree(avl);
                     } else {
                         printTree(bst);
+                    }
+                } else if (operation == 11) {                                                   //CLEAR TREE
+                    if (isAVL) {
+                        avl.clearTree();
+                        System.out.println("Se ha limpiado el árbol");
+                    } else {
+                        bst.clearTree();
+                        System.out.println("Se ha limpiado el árbol");
                     }
                 } else {
                     System.out.println("Opción no válida.");
