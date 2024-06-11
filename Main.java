@@ -449,7 +449,8 @@ public class Main {
 
                 int operation = scanner.nextInt();
                 if (operation == 0) {
-                } else if (operation == 1) {
+                    break;
+                } else if (operation == 1) {                                                    //INSERT
                     System.out.print("Ingrese el valor a insertar: ");
                     int insertValue = scanner.nextInt();
                     if (isAVL) {
@@ -457,7 +458,8 @@ public class Main {
                     } else {
                         bst.insertar(insertValue);
                     }
-                } else if (operation == 2) {
+                    printTree(isAVL ? avl : bst);
+                } else if (operation == 2) {                                                    //DELETE
                     System.out.print("Ingrese el valor a eliminar: ");
                     int deleteValue = scanner.nextInt();
                     if (isAVL) {
@@ -465,49 +467,50 @@ public class Main {
                     } else {
                         bst.delete(deleteValue);
                     }
-                } else if (operation == 3) {
+                    printTree(isAVL ? avl : bst);
+                } else if (operation == 3) {                                                    //HEIGHT
                     if (isAVL) {
                         System.out.println("Altura del árbol AVL: " + avl.heightTree());
                     } else {
                         System.out.println("Altura del BST: " + bst.heightTree());
                     }
-                } else if (operation == 4) {
+                } else if (operation == 4) {                                                    //NODECOUNT
                     if (isAVL) {
                         System.out.println("Número de nodos en el árbol AVL: " + avl.treeNodecount(avl.root));
                     } else {
                         System.out.println("Número de nodos en el BST: " + bst.treeNodecount(bst.root));
                     }
-                } else if (operation == 5) {
+                } else if (operation == 5) {                                                    //IN-ORDER
                     if (isAVL) {
                         avl.inOrder(avl.root);
                     } else {
                         bst.inOrder(bst.root);
                     }
-                } else if (operation == 6) {
+                } else if (operation == 6) {                                                    //PRE-ORDER
                     if (isAVL) {
                         avl.preOrder(avl.root);
                     } else {
                         bst.preOrder(bst.root);
                     }
-                } else if (operation == 7) {
+                } else if (operation == 7) {                                                    //POST-ORDER
                     if (isAVL) {
                         avl.postOrder(avl.root);
                     } else {
                         bst.postOrder(bst.root);
                     }
-                } else if (operation == 8) {
+                } else if (operation == 8) {                                                    //MIN VALUE
                     if (isAVL) {
                         System.out.println("Valor mínimo en el árbol AVL: " + avl.treeMin(avl.root).value);
                     } else {
                         System.out.println("Valor mínimo en el BST: " + bst.treeMin(bst.root).value);
                     }
-                } else if (operation == 9) {
+                } else if (operation == 9) {                                                    //MAX VALUE
                     if (isAVL) {
                         System.out.println("Valor máximo en el árbol AVL: " + avl.treeMax(avl.root).value);
                     } else {
                         System.out.println("Valor máximo en el BST: " + bst.treeMax(bst.root).value);
                     }
-                } else if (operation == 10) {
+                } else if (operation == 10) {                                                   //TREE PRINT
                     if (isAVL) {
                         printTree(avl);
                     } else {
