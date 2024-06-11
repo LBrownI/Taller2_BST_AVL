@@ -369,7 +369,7 @@ public class Main {
 
     static void printTree(BinaryTree binaryTree) {
         if (binaryTree.root == null) {
-            System.out.println("The tree is empty");
+            System.out.println("El árbol está vacío");
             return;
         }
         preOrder(binaryTree.root, 0);
