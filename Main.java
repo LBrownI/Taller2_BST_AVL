@@ -138,7 +138,7 @@ class BinaryTree {
             System.out.println(x.value);
         }
     }
-    Node treeMin(Node x){ //Could be int I think??
+    Node treeMin(Node x){ //Could be int I think lol
         while (x.left != null){
             x = x.left;
         }
