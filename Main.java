@@ -13,7 +13,7 @@ class Node {
         this.parent = null;
         this.left = null;
         this.right = null;
-        this.height = 1;
+        this.height = 1; // Initial height of a new node is 1
     }
 }
 
@@ -21,31 +21,31 @@ class BinaryTree {
     Node root;
 
     BinaryTree() {
-        this.root = null;
+        this.root = null; // Initialize the tree with no root
     }
 
     void insert(int value) {
         Node newNode = new Node(value);
-        if (root == null) {
+        if (root == null) { // If tree is empty, new node becomes root
             root = newNode;
             newNode.value = value;
         } else {
             Node actual = root;
             while (true) {
                 if (value < actual.value) {
-                    if (actual.left == null) {
+                    if (actual.left == null) { // Insert new node as left child
                         actual.left = newNode;
                         newNode.parent = actual;
                         return;
                     }
-                    actual = actual.left;
+                    actual = actual.left; // Traverse to the left child
                 } else {
-                    if (actual.right == null) {
+                    if (actual.right == null) { // Insert new node as right child
                         actual.right = newNode;
                         newNode.parent = actual;
                         return;
                     }
-                    actual = actual.right;
+                    actual = actual.right; // Traverse to the right child
                 }
             }
         }
@@ -53,30 +53,30 @@ class BinaryTree {
 
     void delete(int value){
         Node actual = root;
-        while (actual.value != value) {
+        while (actual.value != value) { // Find the node to delete
             if (value < actual.value) {
                 actual = actual.left;
             } else {
                 actual = actual.right;
             }
-            if (actual == null) {
+            if (actual == null) { // Value not found in the tree
                 System.out.println("The value you are " +
                         "trying to delete was not found.");
                 return;
             }
         }
         if (actual.left == null){
-            transplant(actual, actual.right);
+            transplant(actual, actual.right); // Replace node with its right child
         } else if (actual.right == null){
-            transplant(actual, actual.left);
+            transplant(actual, actual.left);// Replace node with its left child
         } else {
             Node y = treeMin(actual.right);
             if (y.parent != actual){
-                transplant(y, y.right);
+                transplant(y, y.right); // Replace y with its right child
                 y.right = actual.right;
                 y.right.parent = y;
             }
-            transplant(actual, y);
+            transplant(actual, y); // Replace actual with y
             y.left = actual.left;
             y.left.parent = y;
         }
@@ -84,14 +84,14 @@ class BinaryTree {
 
     void transplant(Node u, Node v){
         if (u.parent == null){
-            root = v;
+            root = v; // u is the root
         } else if (u == u.parent.left){
-            u.parent.left = v;
+            u.parent.left = v; // u is a left child
         } else {
-            u.parent.right = v;
+            u.parent.right = v; // u is a right child
         }
         if (v != null){
-            v.parent = u.parent;
+            v.parent = u.parent; // Set v's parent
         }
     }
 
@@ -99,36 +99,36 @@ class BinaryTree {
         if (x == null) {
             return -1;
         } else {
-            return 1 + max(height(x.left), height(x.right));
+            return 1 + max(height(x.left), height(x.right)); // Calculate height recursively
         }
     }
 
     int heightTree() {
-        return height(root);
+        return height(root); // Return height of the tree
     }
 
     int numNodes(Node x) {
         if (x == null) {
             return 0;
         } else {
-            return 1 + numNodes(x.left) + numNodes(x.right);
+            return 1 + numNodes(x.left) + numNodes(x.right);  // Count nodes recursively
         }
     }
 
     int treeNodecount(Node root) {
-        return numNodes(this.root);
+        return numNodes(this.root);  // Return total number of nodes
     }
 
     void inOrder(Node x){
         if (x != null){
             inOrder(x.left);
-            System.out.println(x.value);
+            System.out.println(x.value); // In-order traversal
             inOrder(x.right);
         }
     }
     void preOrder(Node x){
         if (x != null){
-            System.out.println(x.value);
+            System.out.println(x.value); // Pre-order traversal
             preOrder(x.left);
             preOrder(x.right);
         }
@@ -137,23 +137,23 @@ class BinaryTree {
         if (x != null){
             postOrder(x.left);
             postOrder(x.right);
-            System.out.println(x.value);
+            System.out.println(x.value); // Post-order traversal
         }
     }
-    Node treeMin(Node x){ //Could be int I think lol
+    Node treeMin(Node x){ // Find minimum value node
         while (x.left != null){
             x = x.left;
         }
         return x;
     }
-    Node treeMax(Node x){
+    Node treeMax(Node x){ // Find maximum value node
         while (x.right != null){
             x = x.right;
         }
         return x;
     }
     public void clearTree() {
-        root = null;
+        root = null; // Clear the tree
     }
 }
 
@@ -162,10 +162,10 @@ class TreeAVL extends BinaryTree {
         if (N == null) {
             return 0;
         }
-        return N.height;
+        return N.height; // Return height of node N
     }
     private void updateHeight(Node N) {
-        N.height = 1 + Math.max(height(N.left), height(N.right));
+        N.height = 1 + Math.max(height(N.left), height(N.right)); // Update height of node N
     }
 
     // Get Balance factor of node N
@@ -173,13 +173,13 @@ class TreeAVL extends BinaryTree {
     {
         if (N == null)
             return 0;
-        return height(N.left) - height(N.right);
+        return height(N.left) - height(N.right); // Calculate balance factor
     }
     Node rotateLeft(Node x) {
         Node y = x.right;
         x.right = y.left;
         if (y.left != null) {
-            y.left.parent = x;
+            y.left.parent = x; // Update parent reference
         }
         y.parent = x.parent;
         if (x.parent == null) {
@@ -191,7 +191,7 @@ class TreeAVL extends BinaryTree {
         }
         y.left = x;
         x.parent = y;
-        updateHeight(x);
+        updateHeight(x); // Update heights
         updateHeight(y);
         return y;
     }
@@ -199,7 +199,7 @@ class TreeAVL extends BinaryTree {
         Node x = y.left;
         y.left = x.right;
         if (x.right != null) {
-            x.right.parent = y;
+            x.right.parent = y; // Update parent reference
         }
         x.parent = y.parent;
         if (y.parent == null) {
@@ -211,15 +211,14 @@ class TreeAVL extends BinaryTree {
         }
         x.right = y;
         y.parent = x;
-        updateHeight(y);
+        updateHeight(y); // Update heights
         updateHeight(x);
         return x;
     }
 
     Node insert(Node node, int value) {
-        /* 1. Perform the normal BST rotation */
         if (node == null) {
-            return (new Node(value));
+            return (new Node(value)); // Insert new node
         }
         if (value < node.value) {
             node.left = insert(node.left, value);
@@ -230,143 +229,89 @@ class TreeAVL extends BinaryTree {
         } else { // Equal values not allowed
             return node;
         }
-        /* 2. Update height of this ancestor node */
-        node.height = 1 + max(height(node.left),
-                height(node.right));
+        node.height = 1 + max(height(node.left), height(node.right)); // Update height
 
-        /* 3. Get the balance factor of this ancestor
-        node to check whether this node became
-        Wunbalanced */
-        int balance = getBalance(node);
+        int balance = getBalance(node); // Get balance factor
 
-        // If this node becomes unbalanced, then
-        // there are 4 cases Left Left Case
-        if (balance > 1 && value < node.left.value){
-            return rotateRight(node);
+        if (balance > 1 && value < node.left.value) {
+            return rotateRight(node); // Left-Left Case
         }
-        // Right Right Case
         if (balance < -1 && value > node.right.value) {
-            return rotateLeft(node);
+            return rotateLeft(node); // Right-Right Case
         }
-        // Left Right Case
         if (balance > 1 && value > node.left.value) {
             node.left = rotateLeft(node.left);
-            return rotateRight(node);
+            return rotateRight(node); // Left-Right Case
         }
-
-        // Right Left Case
         if (balance < -1 && value < node.right.value) {
             node.right = rotateRight(node.right);
-            return rotateLeft(node);
+            return rotateLeft(node); // Right-Left Case
         }
-        /* return the (unchanged) node pointer */
         return node;
     }
 
-    /* Given a non-empty binary search tree, return the
-    node with minimum value value found in that tree.
-    Note that the entire tree does not need to be
-    searched. */
-    Node minValueNode(Node node)
-    {
+    /* Dado un árbol de búsqueda binario no vacío, devuelve el nodo con el valor mínimo encontrado en ese árbol.
+    NO es necesario buscar en to do el árbol. */
+    Node minValueNode(Node node) {
         Node current = node;
-
-        /* loop down to find the leftmost leaf */
-        while (current.left != null)
-            current = current.left;
-
+        while (current.left != null) {
+            current = current.left; // Find minimum value node
+        }
         return current;
     }
 
-    Node delete(Node root, int value)
-    {
-        // STEP 1: PERFORM STANDARD BST DELETE
-        if (root == null)
+    Node delete(Node root, int value) {
+        if (root == null) {
             return root;
-
-        // If the value to be deleted is smaller than
-        // the root's value, then it lies in left subtree
-        if (value < root.value)
+        }
+        if (value < root.value) {
             root.left = delete(root.left, value);
-
-            // If the value to be deleted is greater than the
-            // root's value, then it lies in right subtree
-        else if (value > root.value)
+        }
+        else if (value > root.value) {
             root.right = delete(root.right, value);
-
-            // if value is same as root's value, then this is the node
-            // to be deleted
-        else
-        {
-
-            // node with only one child or no child
-            if ((root.left == null) || (root.right == null))
-            {
+        } else {
+            if ((root.left == null) || (root.right == null)) {
                 Node temp = null;
-                if (temp == root.left)
+                if (temp == root.left) {
                     temp = root.right;
-                else
+                } else {
                     temp = root.left;
-
-                // No child case
-                if (temp == null)
-                {
+                }
+                if (temp == null) {
                     temp = root;
                     root = null;
+                } else {  // One child case
+                    root = temp;
                 }
-                else // One child case
-                    root = temp; // Copy the contents of
-                // the non-empty child
-            }
-            else
-            {
-
-                // node with two children: Get the inorder
-                // successor (smallest in the right subtree)
+            } else {
                 Node temp = minValueNode(root.right);
-
-                // Copy the inorder successor's data to this node
                 root.value = temp.value;
-
-                // Delete the inorder successor
                 root.right = delete(root.right, temp.value);
             }
         }
 
-        // If the tree had only one node then return
-        if (root == null)
+        if (root == null){
             return root;
+        }
+        root.height = max(height(root.left), height(root.right)) + 1; // Update height
 
-        // STEP 2: UPDATE HEIGHT OF THE CURRENT NODE
-        root.height = max(height(root.left), height(root.right)) + 1;
+        int balance = getBalance(root); // Get balance factor
 
-        // STEP 3: GET THE BALANCE FACTOR OF THIS NODE (to check whether
-        // this node became unbalanced)
-        int balance = getBalance(root);
-
-        // If this node becomes unbalanced, then there are 4 cases
-        // Left Left Case
-        if (balance > 1 && getBalance(root.left) >= 0)
-            return rotateRight(root);
-
-        // Left Right Case
-        if (balance > 1 && getBalance(root.left) < 0)
-        {
+        // 4 cases
+        if (balance > 1 && getBalance(root.left) >= 0) {
+            return rotateRight(root); // Left-Left Case
+        }
+        if (balance > 1 && getBalance(root.left) < 0) {
             root.left = rotateLeft(root.left);
-            return rotateRight(root);
+            return rotateRight(root); // Left-Right Case
         }
-
-        // Right Right Case
-        if (balance < -1 && getBalance(root.right) <= 0)
-            return rotateLeft(root);
-
-        // Right Left Case
-        if (balance < -1 && getBalance(root.right) > 0)
-        {
+        if (balance < -1 && getBalance(root.right) <= 0) {
+            return rotateLeft(root); // Right-Right Case
+        }
+        if (balance < -1 && getBalance(root.right) > 0) {
             root.right = rotateRight(root.right);
-            return rotateLeft(root);
+            return rotateLeft(root); // Right-Left Case
         }
-
         return root;
     }
 }
@@ -417,7 +362,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         BinaryTree bst = new BinaryTree();
         TreeAVL avl = new TreeAVL();
         boolean isAVL = false;
@@ -428,7 +373,7 @@ public class Main {
             System.out.println("2. Árbol Adelson-Velskii y Landis (AVL)");
             System.out.println("0. Salir");
 
-            int choice = scanner.nextInt();
+            int choice = input.nextInt();
 
             if (choice == 0) {
                 break;
@@ -440,8 +385,6 @@ public class Main {
                 System.out.println("Opción no válida.");
                 continue;
             }
-
-            //TODO: make an option that clears the current tree (BST or AVL)
 
             while (true) {
                 System.out.println("Elije la operación a realizar:");
@@ -458,12 +401,12 @@ public class Main {
                 System.out.println("11.Limpiar el árbol");
                 System.out.println("0. Volver al menú anterior");
 
-                int operation = scanner.nextInt();
+                int operation = input.nextInt();
                 if (operation == 0) {
                     break;
                 } else if (operation == 1) {                                                    //INSERT
                     System.out.print("Ingrese el valor a insertar: ");
-                    int insertValue = scanner.nextInt();
+                    int insertValue = input.nextInt();
                     if (isAVL) {
                         avl.root = avl.insert(avl.root, insertValue);
                     } else {
@@ -472,7 +415,7 @@ public class Main {
                     printTree(isAVL ? avl : bst);
                 } else if (operation == 2) {                                                    //DELETE
                     System.out.print("Ingrese el valor a eliminar: ");
-                    int deleteValue = scanner.nextInt();
+                    int deleteValue = input.nextInt();
                     if (isAVL) {
                         avl.root = avl.delete(avl.root, deleteValue);
                     } else {
@@ -540,7 +483,7 @@ public class Main {
                 }
             }
         }
-        scanner.close();
+        input.close();
     }
 }
 
