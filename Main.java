@@ -23,7 +23,7 @@ class BinaryTree {
         this.root = null;
     }
 
-    void insertar(int value) {
+    void insert(int value) {
         Node newNode = new Node(value);
         if (root == null) {
             root = newNode;
@@ -59,7 +59,8 @@ class BinaryTree {
                 actual = actual.right;
             }
             if (actual == null) {
-                System.out.println("The value you are trying to delete was not found.");
+                System.out.println("The value you are " +
+                        "trying to delete was not found.");
                 return;
             }
         }
@@ -211,6 +212,7 @@ public class Main {
             return;
         }
         preOrder(binaryTree.root, 0);
+        System.out.println();
     }
 
     static void preOrder(Node node, int nodeHeight) {
@@ -295,13 +297,13 @@ public class Main {
                 else if (operation == 1) {
                     System.out.print("Ingrese el valor a insertar: ");
                     int valorInsertar = scanner.nextInt();
-                    arbolActual.insertar(valorInsertar);
+                    arbolActual.insert(valorInsertar);
                     printTree(arbolActual);
                 }
                 else if (operation == 2) {
                     System.out.print("Ingrese el valor a eliminar: ");
                     int deleteValue = scanner.nextInt();
-                    arbolActual.delete(deleteValue);                   //PLACEHOLDER
+                    arbolActual.delete(deleteValue);
                     printTree(arbolActual);
                 }
                 else if (operation == 3) {
