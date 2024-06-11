@@ -223,8 +223,10 @@ class TreeAVL extends BinaryTree {
         }
         if (value < node.value) {
             node.left = insert(node.left, value);
+            node.left.parent = node; // Update parent reference
         } else if (value > node.value) {
             node.right = insert(node.right, value);
+            node.right.parent = node; // Update parent reference
         } else { // Equal values not allowed
             return node;
         }
