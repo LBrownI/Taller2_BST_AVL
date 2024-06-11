@@ -449,7 +449,6 @@ public class Main {
 
                 int operation = scanner.nextInt();
                 if (operation == 0) {
-                    break;
                 } else if (operation == 1) {
                     System.out.print("Ingrese el valor a insertar: ");
                     int insertValue = scanner.nextInt();
@@ -458,7 +457,6 @@ public class Main {
                     } else {
                         bst.insertar(insertValue);
                     }
-                    break;
                 } else if (operation == 2) {
                     System.out.print("Ingrese el valor a eliminar: ");
                     int deleteValue = scanner.nextInt();
@@ -467,28 +465,24 @@ public class Main {
                     } else {
                         bst.delete(deleteValue);
                     }
-                    break;
                 } else if (operation == 3) {
                     if (isAVL) {
                         System.out.println("Altura del árbol AVL: " + avl.heightTree());
                     } else {
                         System.out.println("Altura del BST: " + bst.heightTree());
                     }
-                    break;
                 } else if (operation == 4) {
                     if (isAVL) {
                         System.out.println("Número de nodos en el árbol AVL: " + avl.treeNodecount(avl.root));
                     } else {
                         System.out.println("Número de nodos en el BST: " + bst.treeNodecount(bst.root));
                     }
-                    break;
                 } else if (operation == 5) {
                     if (isAVL) {
                         avl.inOrder(avl.root);
                     } else {
                         bst.inOrder(bst.root);
                     }
-                    break;
                 } else if (operation == 6) {
                     if (isAVL) {
                         avl.preOrder(avl.root);
@@ -501,28 +495,24 @@ public class Main {
                     } else {
                         bst.postOrder(bst.root);
                     }
-                    break;
                 } else if (operation == 8) {
                     if (isAVL) {
                         System.out.println("Valor mínimo en el árbol AVL: " + avl.treeMin(avl.root).value);
                     } else {
                         System.out.println("Valor mínimo en el BST: " + bst.treeMin(bst.root).value);
                     }
-                    break;
                 } else if (operation == 9) {
                     if (isAVL) {
                         System.out.println("Valor máximo en el árbol AVL: " + avl.treeMax(avl.root).value);
                     } else {
                         System.out.println("Valor máximo en el BST: " + bst.treeMax(bst.root).value);
                     }
-                    break;
                 } else if (operation == 10) {
                     if (isAVL) {
                         printTree(avl);
                     } else {
                         printTree(bst);
                     }
-                    break;
                 } else {
                     System.out.println("Opción no válida.");
                 }
