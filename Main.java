@@ -413,7 +413,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         BinaryTree bst = new BinaryTree();
         TreeAVL avl = new TreeAVL();
-        BinaryTree arbolActual = null;
+        boolean isAVL = false;
 
         while (true) {
             System.out.println("Seleccione el tipo de árbol:");
@@ -421,30 +421,30 @@ public class Main {
             System.out.println("2. Árbol Adelson-Velskii y Landis (AVL)");
             System.out.println("0. Salir");
 
-            int option = scanner.nextInt();
+            int choice = scanner.nextInt();
 
-            if (option == 0) {
+            if (choice == 0) {
                 break;
-            } else if (option == 1) {
-                arbolActual = bst;
-            } else if (option == 2) {
-                arbolActual = avl;
+            } else if (choice == 1) {
+                isAVL = false;
+            } else if (choice == 2) {
+                isAVL = true;
             } else {
                 System.out.println("Opción no válida.");
                 continue;
             }
 
             while (true) {
-                System.out.println("Seleccione la operación a realizar:");
+                System.out.println("Elije la operación a realizar:");
                 System.out.println("1. Insertar");
                 System.out.println("2. Eliminar");
                 System.out.println("3. Determinar altura");
                 System.out.println("4. Determinar cantidad de nodos");
-                System.out.println("5. Recorrer en in-order");
-                System.out.println("6. Recorrer en pre-order");
-                System.out.println("7. Recorrer en post-order");
-                System.out.println("8. Determinar el mínimo");
-                System.out.println("9. Determinar el máximo");
+                System.out.println("5. Recorrido in-order");
+                System.out.println("6. Recorrido pre-order");
+                System.out.println("7. Recorrido post-order");
+                System.out.println("8. Determinar valor mínimo");
+                System.out.println("9. Determinar valor máximo");
                 System.out.println("0. Volver al menú anterior");
 
                 int operation = scanner.nextInt();
@@ -452,42 +452,77 @@ public class Main {
                     break;
                 } else if (operation == 1) {
                     System.out.print("Ingrese el valor a insertar: ");
-                    int valorInsertar = scanner.nextInt();
-                    arbolActual.insertar(valorInsertar);
-                    printTree(arbolActual);
+                    int insertValue = scanner.nextInt();
+                    if (isAVL) {
+                        avl.root = avl.insert(avl.root, insertValue);
+                    } else {
+                        bst.insertar(insertValue);
+                    }
+                    break;
                 } else if (operation == 2) {
                     System.out.print("Ingrese el valor a eliminar: ");
                     int deleteValue = scanner.nextInt();
-                    arbolActual.delete(deleteValue);                   //PLACEHOLDER
-                    printTree(arbolActual);
+                    if (isAVL) {
+                        avl.root = avl.delete(avl.root, deleteValue);
+                    } else {
+                        bst.delete(deleteValue);
+                    }
+                    break;
                 } else if (operation == 3) {
-                    System.out.println("La altura del árbol es: " + arbolActual.height(arbolActual.root));
+                    if (isAVL) {
+                        System.out.println("Altura del árbol AVL: " + avl.heightTree());
+                    } else {
+                        System.out.println("Altura del BST: " + bst.heightTree());
+                    }
+                    break;
                 } else if (operation == 4) {
-                    System.out.println("La cantidad de nodos del árbol es: " + arbolActual.treeNodecount(arbolActual.root));
+                    if (isAVL) {
+                        System.out.println("Número de nodos en el árbol AVL: " + avl.treeNodecount(avl.root));
+                    } else {
+                        System.out.println("Número de nodos en el BST: " + bst.treeNodecount(bst.root));
+                    }
+                    break;
                 } else if (operation == 5) {
-                    System.out.print("Recorrido in-order: ");
-                    arbolActual.inOrder(arbolActual.root);
-                    System.out.println();
+                    if (isAVL) {
+                        avl.inOrder(avl.root);
+                    } else {
+                        bst.inOrder(bst.root);
+                    }
+                    break;
                 } else if (operation == 6) {
-                    System.out.print("Recorrido pre-order: ");
-                    arbolActual.preOrder(arbolActual.root);
-                    System.out.println();
+                    if (isAVL) {
+                        avl.preOrder(avl.root);
+                    } else {
+                        bst.preOrder(bst.root);
+                    }
                 } else if (operation == 7) {
-                    System.out.print("Recorrido post-order: ");
-                    arbolActual.postOrder(arbolActual.root);
-                    System.out.println();
+                    if (isAVL) {
+                        avl.postOrder(avl.root);
+                    } else {
+                        bst.postOrder(bst.root);
+                    }
+                    break;
                 } else if (operation == 8) {
-                    if (arbolActual.root != null) {
-                        System.out.println("El valor mínimo del árbol es: " + arbolActual.treeMin(arbolActual.root));
+                    if (isAVL) {
+                        System.out.println("Valor mínimo en el árbol AVL: " + avl.treeMin(avl.root).value);
                     } else {
-                        System.out.println("El árbol está vacío.");
+                        System.out.println("Valor mínimo en el BST: " + bst.treeMin(bst.root).value);
                     }
+                    break;
                 } else if (operation == 9) {
-                    if (arbolActual.root != null) {
-                        System.out.println("El valor máximo del árbol es: " + arbolActual.treeMax(arbolActual.root));
+                    if (isAVL) {
+                        System.out.println("Valor máximo en el árbol AVL: " + avl.treeMax(avl.root).value);
                     } else {
-                        System.out.println("El árbol está vacío.");
+                        System.out.println("Valor máximo en el BST: " + bst.treeMax(bst.root).value);
                     }
+                    break;
+                } else if (operation == 10) {
+                    if (isAVL) {
+                        printTree(avl);
+                    } else {
+                        printTree(bst);
+                    }
+                    break;
                 } else {
                     System.out.println("Opción no válida.");
                 }
