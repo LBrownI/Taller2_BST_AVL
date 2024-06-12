@@ -177,6 +177,9 @@ class TreeAVL extends BinaryTree {
         return height(N.left) - height(N.right); // Calculate balance factor
     }
     Node rotateLeft(Node x) {
+        System.out.println("árbol antes de rotar:");
+        Main.printTree(this);
+
         Node y = x.right;
         x.right = y.left;
         if (y.left != null) {
@@ -194,9 +197,16 @@ class TreeAVL extends BinaryTree {
         x.parent = y;
         updateHeight(x); // Update heights
         updateHeight(y);
+
+        System.out.println("árbol después de rotación a la izquierda");
+        Main.printTree(this);
         return y;
+
     }
     Node rotateRight(Node y) {
+        System.out.println("árbol antes de rotar:");
+        Main.printTree(this);
+
         Node x = y.left;
         y.left = x.right;
         if (x.right != null) {
@@ -214,6 +224,9 @@ class TreeAVL extends BinaryTree {
         y.parent = x;
         updateHeight(y); // Update heights
         updateHeight(x);
+
+        System.out.println("árbol después de rotación a la derecha");
+        Main.printTree(this);
         return x;
     }
 
@@ -230,6 +243,7 @@ class TreeAVL extends BinaryTree {
         } else { // Equal values not allowed
             return node;
         }
+
         node.height = 1 + max(height(node.left), height(node.right)); // Update height
 
         int balance = getBalance(node); // Get balance factor
