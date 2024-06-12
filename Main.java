@@ -265,8 +265,6 @@ class TreeAVL extends BinaryTree {
         return node;
     }
 
-    /* Dado un árbol de búsqueda binario no vacío, devuelve el nodo con el valor mínimo encontrado en ese árbol.
-    NO es necesario buscar en to do el árbol. */
     Node minValueNode(Node node) {
         Node current = node;
         while (current.left != null) {
