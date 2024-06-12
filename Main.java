@@ -433,7 +433,7 @@ public class Main {
                             bst.insert(insertValue);
                         }
                         printTree(isAVL ? avl : bst);
-                    } else if (operation == 2) {                                                    //DELETE
+                    } else if (operation == 2) {                                                   //DELETE
                         System.out.print("Ingrese el valor a eliminar: ");
                         int deleteValue = input.nextInt();
                         if (isAVL) {
