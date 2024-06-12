@@ -122,13 +122,13 @@ class BinaryTree {
     void inOrder(Node x){
         if (x != null){
             inOrder(x.left);
-            System.out.println(x.value); // In-order traversal
+            System.out.print(x.value + " "); // In-order traversal
             inOrder(x.right);
         }
     }
     void preOrder(Node x){
         if (x != null){
-            System.out.println(x.value); // Pre-order traversal
+            System.out.print(x.value + " "); // Pre-order traversal
             preOrder(x.left);
             preOrder(x.right);
         }
@@ -137,7 +137,7 @@ class BinaryTree {
         if (x != null){
             postOrder(x.left);
             postOrder(x.right);
-            System.out.println(x.value); // Post-order traversal
+            System.out.print(x.value + " "); // Post-order traversal
         }
     }
     Node treeMin(Node x){ // Find minimum value node
@@ -435,23 +435,29 @@ public class Main {
                         System.out.println("Número de nodos en el BST: " + bst.treeNodecount(bst.root));
                     }
                 } else if (operation == 5) {                                                    //IN-ORDER
+                    System.out.println("Recorrido in-order:");
                     if (isAVL) {
                         avl.inOrder(avl.root);
                     } else {
                         bst.inOrder(bst.root);
                     }
-                } else if (operation == 6) {                                                    //PRE-ORDER
+                    System.out.println("\n");
+                } else if (operation == 6) {
+                    System.out.println("Recorrido pre-order:");                                  //PRE-ORDER
                     if (isAVL) {
                         avl.preOrder(avl.root);
                     } else {
                         bst.preOrder(bst.root);
                     }
-                } else if (operation == 7) {                                                    //POST-ORDER
+                    System.out.println("\n");
+                } else if (operation == 7) {
+                    System.out.println("Recorrido post-order:");                                     //POST-ORDER
                     if (isAVL) {
                         avl.postOrder(avl.root);
                     } else {
                         bst.postOrder(bst.root);
                     }
+                    System.out.println("\n");
                 } else if (operation == 8) {                                                    //MIN VALUE
                     if (isAVL) {
                         System.out.println("Valor mínimo en el árbol AVL: " + avl.treeMin(avl.root).value);
